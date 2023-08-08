@@ -1,0 +1,507 @@
+a {
+  color: #00AAFF;
+  text-decoration: none;
+}
+/*Search Bar Styling*/
+form.searchBar{
+  max-width: 500px;
+  height:40px;
+  margin: auto;
+  margin-top: 50px;
+  font-size: 16px;
+}
+
+.selectize-control {
+  float: left;
+  width: 80%;
+    -webkit-appearance: none;
+   -moz-appearance:    none;
+   appearance:         none;
+    background-position-x: 370px;
+}
+
+form.searchBar button {
+  float: left;
+  width: 50px;
+  padding: 1.5%;
+  background: #55d6aa;
+  color: white;
+  font-size: 16px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.searchBar button:hover {
+  background: #0b7dda;
+}
+
+form.searchBar::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*Navigation Bar Styling*/
+.container {
+	width:80%;
+	margin: 0 auto;
+}
+
+
+body {
+	margin: 0;
+	background: #222;
+	font-family: 'Work Sans', sans-serif;
+	font-weight:400;
+  color: white;
+  text-align: center;
+}
+
+header {
+	background: #55d6aa;
+}
+
+header::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.logo {
+	float: left;
+	padding:10px 0;
+
+}
+
+nav {
+	float:right;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+nav li {
+	display: inline-block;
+	margin-left: 70px;
+	padding-top:23px;
+	position:relative;
+}
+
+nav a {
+	color:#444;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+}	
+
+nav a:hover {
+	color: #000;
+}
+
+nav a::before {
+	content:'';
+	display:block;
+	height: 5px;
+	width: 100%;
+	background-color: #444;
+	
+	position: absolute;
+	top: 0;
+	width: 0%;
+	
+	transition-timing-function: all ease-in-out;
+	transition-delay: 100ms;
+	transition-duration: 250ms;
+
+}
+
+nav a:hover::before {
+	width: 100%;
+}
+
+img {
+  border: 0px dotted white;
+  border-radius: 8px;
+  padding: 2px;
+  width: 50px;
+}
+
+#welcomeH1 {
+	position: absolute;
+  width: 20%;
+  margin-left:40%;
+	text-align: center;
+	color:#fff;
+	font-size: 15px;
+	line-height:2em;
+	border-bottom: 5px solid #fff;
+  margin-top: 20px;
+}
+#instructions{
+  margin-top: 120px;
+}
+
+.container2 {
+	position:absolute;
+	left:20%;
+	top:27%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	height: 50px;
+	border-bottom:5px solid #000;
+	font-family:verdana;
+	line-height: 50px;
+	background: #222;
+	overflow: hidden;
+}
+
+.container2 span {
+	color: #fff;
+	font-size:30px;
+	background: #222;
+	display: inline-block;
+	padding: 2px 20px;
+	text-transform: uppercase;
+}
+
+.container2 span:before{
+	position:absolute;
+	content: "";
+	width: 35%;
+	height: 100%;
+	background: #222;
+	z-index: -1;
+	transform:rotate(45deg);
+}
+
+.container3 {
+	position: absolute;
+	left:4%;
+	top: 30%;
+	color:#fff;
+	font-size: 20px;
+	font-family: verdana;
+	text-align: justify;
+	line-height: 2em
+}
+
+.container4 {
+	position: absolute;
+	left:35%;
+	top:90%;
+	color:#fff;
+	font-size: 11px;
+	font-family: verdana;
+	line-height:2em;
+	border-top: 5px double #fff;
+}
+
+.container5 {
+  position: absolute;
+  top: 65%;
+  left: 35%;
+  transform: translateY(-50%);
+  margin: 0 auto;
+  width: 500px;
+  
+}
+.shape1,
+.shape2 {
+  stroke-dasharray: 1120;
+  stroke-width: 5px;
+  fill: transparent;
+  stroke: #19f6e8;
+  border-bottom: 5px solid black;
+  transition-timing-function: linear;
+  transition: stroke-dashoffset 4s, stroke-dasharray 4s;
+}
+.shape1 {
+  stroke-dashoffset: 1120;
+}
+.shape2 {
+  stroke-dashoffset: -1120;
+}
+.text {
+  font-family: 'Roboto Condensed';
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: 8px;
+  color: #fff;
+  top: -48px;
+  position: relative;
+  padding-left:140px;
+}
+.container5:hover .shape1,
+.container5:hover .shape2 {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 1120;
+}
+
+/* Class page styling */
+#nameAndCourse{
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+#nameAndCourse h1{
+  margin-bottom: 20px;
+}
+/* The different sections on the class page */
+#information{
+  margin-top: 40px;
+  margin: auto;
+  width: 70%;
+  border: 2px solid white;
+}
+#summary{
+  margin: 40px auto;
+  width: 70%;
+  border: 2px solid white;
+}
+
+#flowChart{
+  background-color: #55d6aa;
+  border: 3px solid white;
+  width: 70%;
+  margin:auto;
+}
+
+#predictionForm{
+  margin: 40px auto;
+  width: 70%;
+  border: 2px solid white;
+}
+
+#commentSection{
+  margin-top: 50px;
+  margin: auto;
+  width: 70%;
+  border: 2px solid white;
+}
+.postComment{
+  color: white;
+  border: 1px solid white;
+  padding: 10px;
+}
+#postTextfield{
+  height: 15px;
+  width: 400px;
+  text-align: left;
+  margin-top: 10px;
+  padding: 10px;
+}
+#postButton{
+  height: 40px;
+  width: 40px;
+}
+#commentList{
+  margin: 20px auto;
+  width: 80%;
+}
+.commentBlock{
+  color: white;
+  border: 1px solid white;
+}
+
+.off{
+  opacity: 0;
+}
+
+footer {
+margin-top:27%;
+padding-right: 85%;
+opacity:50%;
+margin-left: 40px;
+}
+
+#unitsList {
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+#unitsTable {
+  border-collapse: collapse;
+  margin:auto;
+}
+
+#unitsTable tr td{
+  border: 2px solid white;
+  padding: 10px;
+}
+
+#keyInput {
+  margin: auto;
+  width: 60%; 
+  overflow: hidden;
+  padding-bottom: "20px";
+  border: "2px solid white";
+}
+
+#keyInput input {
+  height: 30px;
+  width: 240px;
+  font-family: verdana;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#editDiv {
+  margin-top: 40px;
+}
+
+#editButton {
+  height: 30px;
+  width: 120px;
+  background: #55d6aa;
+  color: white;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+#secretForm {
+  height: 0px;
+  overflow: hidden;
+}
+
+/* About Page */
+#aboutUs {
+  margin: auto;
+  margin-top: 60px;
+  width: 55%;
+}
+
+#ReportPageheader {
+  width: 60%;
+  margin-left:21%;
+	text-align: center;
+	color:#fff;
+	font-size: 15px;
+	line-height:2em;
+	border-bottom: 5px solid #fff;
+  margin-top: 15%;
+}
+
+#AboutPageReport {
+  margin-top: 2%;
+}
+#Contact {
+  margin-right: 75%;
+  margin-top: 3%;
+  opacity: 50% ;
+}
+#ReportForm{
+  padding-bottom: 5%;
+}
+#contributors{
+  margin-top: 40px;
+  font-size: 20px;
+}
+.aboutDescription{
+  margin-top: 40px;
+  font-size: 17px;
+}
+//Edit page
+#editwelcome{
+  margin-top: 20px;
+  width: 70%;
+}
+#editform{
+  margin-top: 20px;
+  border: 2px solid white;
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+#edittable{
+  width: 95%; 
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin: auto;
+}
+
+#errorA {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.smallInput {
+  height: 20px;
+  width: 200px;
+  text-align: left;
+  padding: 10px;
+}
+
+.largeInput {
+  width: 99%;
+  height: 100px;
+  text-align: left;
+  padding: 10px;
+}
+
+.inputLabel {
+  width: 100%;
+  border-bottom: 1px solid white;
+  font-weight: bold;
+  padding: 5px;
+  text-align: left;
+}
+
+.addButton {
+  padding: 5px;
+  width: 225px;
+  height: 40px;
+  color: white;
+  background-color: #55d6aa;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+#saveChanges {
+  padding: 5px;
+  width: 225px;
+  height: 40px;
+  color: black;
+  background-color: white;
+}
+
+#removeClassButton{
+  padding: 5px;
+  width: 225px;
+  height: 40px;
+  color: white;
+  background-color: #FF6666;
+}
+
+.deleteButton1, .deleteButton2{
+  padding: 5px;
+  width: 175px;
+  height: 40px;
+  color: white;
+  background-color: #FF6666;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.valuesDiv{
+  height: 0;
+  overflow: hidden;
+}
+
+#copyright{
+  padding-right: 85%;
+  opacity:50%;
+  margin-left: 40px;
+  margin-top: 60px;
+}
+
+#instructions2{
+  width: 50%;
+  margin: auto;
+  margin-top: 40px;
+}

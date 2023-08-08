@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<% var imsaClass = { name: "", course: "", department: "", arrayChart: [], grading: "", units: [], extra: [], key: ""} %>
+<% className = searchValue.split("+").join(" ").split("/")[1] %> 
+<% classList.forEach(function(item){ %>
+    <% if (className == item.name){ %>
+        <% imsaClass = item %>
+    <% } %>
+<% }); %>
+<% var units = imsaClass.units %>
+<% var arrayChart = imsaClass.arrayChart %>
+<% var extra = imsaClass.extra %>
+<% var key = imsaClass.key %>
+
+
+<head>
+    <meta charset="utf-8" />
+    <title><%= imsaClass.name %> - IMSA Courses</title>
+    <link rel="stylesheet" href="/assets/flowchart.css" />
+    <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2017/05/13/20/46/office-2310610_960_720.png" sizes="16x16">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/assets/scrambler.js"></script>
+</head>
+
+<body>
+
+<%- include('partials/header.ejs') %>
+
+<div id="nameAndCourse">
+  <h1 id="classNameH1"><%= imsaClass.name %></h1>
+  <h3 id="classCourseH4"><%= imsaClass.course %></h3>
+</div>
+
+<script>
+if($("#classNameH1").text() == ""){
+    document.location.href = "/error";
+}
+</script>
+
+<div id="flowChart">
+  <ol class="process_diagram">
+  <% arrayChart.forEach(function(item){ %>
+  <% if (typeof(item) == "string"){ %>
+    <% var dontLink = ((item == "...") || (item == "No Further Classes")); %>
+    <% if (dontLink){ %>
+      <li><div><%= item %></div></li>
+    <% } %>
+    <% if (!dontLink){ %>
+      <li><div><a href=<%="/classpage?searchValue=%2F" + item.split(" ").join("+") %>><%= item %></a></div></li>
+    <% } %>
+  <% } %>
+  <% if (typeof(item) == "object"){ %>
+    <li><ul>
+    <% item.forEach(function(item1){ %>
+      <li><div><a href=<%="/classpage?searchValue=%2F" + item1.split(" ").join("+") %>><%= item1 %></a></div></li>
+    <% }); %>
+    </ul></li>
+  <% } %>
+  <% }); %>
+  </ol>
+</div>
+<div class="off"><p>Hello</p></div>
+
+
+<div id="information">
+  <h2>Extra Information</h2>
+  <hr>
+  <ul id="extrasList">
+  <% extra.forEach(function(item){ %>
+    <li><%= item %></li>
+  <% }); %>
+  </ul>
+</div>
+
+<div id="summary">
+  <h2>Course Info and Syllabus Summary</h2>
+  <hr>
+  <h3>Grading System (Semester)</h3>
+  <p><%= imsaClass.grading %></p>
+  <h3>Units</h3>
+  <div id="unitsList">
+    <table id="unitsTable">
+      <% units.forEach(function(item, index){ %>
+        <tr>
+          <td><b>Unit <%= index + 1 %></b></td>
+          <td><%= item %></td>
+        </tr>
+      <% }); %>
+    </table>
+  </div>
+</div>
+
+<div id="editDiv">
+  <b><p id="editInstructions">Have a key and want to edit the information displayed on this page? Enter the key in the text field and click the  edit button below!</p></b>
+  <div id="keyInput">
+    <!-- The input is scrambled first before checked with the key, so the key value on JSON isn't the input you should put in -->
+    <input type="textfield" placeholder="Enter key"></input>
+  </div>
+  <button id="editButton"><b>Edit Page</b></button>
+</div>
+
+<p id="copyright">©IMSA Courses 2022</p>       
+        
+<form id="secretForm" action="/editpage" method="post">
+  <input name="currentClass" value=<%= imsaClass.name.split(" ").join("+") %>></input>
+</form>
+
+<script>
+$("#editButton").click(function(){ 
+  var input = $("#keyInput input").val();
+  var scrambledInput = "";
+  var match = false;
+  scrambledInput = scramble(input);
+  if(scrambledInput == "<%= key %>"){
+    $("#secretForm").submit(); 
+  }
+  if(scrambledInput != "<%= key %>"){ 
+    $("#editInstructions").text("Incorrect key, please try again"); 
+  }
+});
+</script>
+
+</body
+</html>

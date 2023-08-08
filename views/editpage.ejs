@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<% var imsaClass %>
+<% var chartString %>
+<% var units = imsaClass.units %>
+<% var extra = imsaClass.extra %>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title><%= imsaClass.name %> - Edit Mode</title>
+    <link rel="stylesheet" href="/assets/flowchart.css" />
+    <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2017/05/13/20/46/office-2310610_960_720.png" sizes="16x16">
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<%- include('partials/header.ejs') %>
+
+<% if(imsaClass.name != "Add a Class"){ %>
+<p id="editwelcome">Welcome to <%= imsaClass.name %> edit page! Have fun!</p>
+<% } else { %>
+<p id="editwelcome">This page is meant to provide an example of how to use the edit tool to create a new page for classes you might want to add. When you finish filling out information and want to add the class to the list of avaliable classes, press the "Add Class" button at the bottom. Make sure the department entry matches one of the departments the search bar organizes classes into, or the class will show up in the Archived section. Also, the key is scrambled for security so you'll have to send a email to kzhang1@imsa.edu to descramble the key <br><br>**The flowchart entry requires strict formatting (no spaces between quotes, commas, brackets, etc.) and perfect spelling (case sensitive) or the link to the desired class will not work.**</p>
+<% } %>
+<% if(imsaClass.name != "Add a Class"){ %>
+<form id="editform" action="/editinfo" method="post">
+<% } else { %>
+<form id="editform" action="/addClass" method="post">
+<% } %>
+<div id="edittable">
+  <div id="arrayChart">
+    <p class="inputLabel">Course Flow Chart:</p>
+    <textarea class="largeInput" name="chart"><%= chartString %></textarea><br>
+  </div>
+  <div id="nameSection">
+    <p class="inputLabel">Course Name:</p>
+    <textarea class="smallInput" name="name"><%= imsaClass.name %></textarea><br>
+  </div>
+  <div id="courseSection">
+    <p class="inputLabel">Course Code:</p>
+    <textarea class="smallInput" name="course"><%= imsaClass.course %></textarea><br>
+  </div>
+  <div id="departmentSection">
+    <p class="inputLabel">Department:</p>
+    <textarea class="smallInput" name="department"><%= imsaClass.department %></textarea><br>
+  </div>
+  <div id="gradingSection">
+    <p class="inputLabel">Grading System:</p>
+    <textarea class="largeInput" name="grading"><%= imsaClass.grading %></textarea>
+  </div>
+  <div id="keySection">
+    <p class="inputLabel">Class Key:</p>
+    <textarea class="smallInput" name="key"><%= imsaClass.key %></textarea>
+  </div>
+  <div id="unitsSection">
+    <p class="inputLabel">Course Units:</p>
+    <% units.forEach(function(item, index){ %>
+      <p>Unit <%= index+1 %>:</p>
+      <textarea class="smallInput" name="units_<%= index %>"><%= item %></textarea><br>
+    <% }); %>
+    <button type="button" class="deleteButton1">Delete Last Unit</button>
+    <div class="addDiv"><button type="button" class="addButton" id="addButton1">Add Unit</button></div>
+  </div>
+  <div id="extraSection">
+    <p class="inputLabel">Extra Information:</p>
+    <% extra.forEach(function(item, index){ %>
+      <p>Bullet Point <%= index+1 %>:</p>
+      <textarea class="largeInput" name="extra_<%= index %>"><%= item %></textarea><br>
+    <% }); %> 
+    <button type="button" class="deleteButton2">Delete Last Bullet Point</button>
+    <div class="addDiv"><button type="button" class="addButton" id="addButton2">Add Bullet Point</button></div>
+  </div>
+  <div class="valuesDiv">
+    <textarea name="unitsLength" id="unitsLength"><%= units.length + 1 %></textarea>
+    <textarea name="extraLength" id="extraLength"><%= extra.length + 1 %></textarea>
+    <textarea name="oldName"><%= imsaClass.name %></textarea>
+  </div> 
+  <p class="inputLabel"></p>
+  <% if(imsaClass.name != "Add a Class"){ %>
+  <br><div style="text-align: center; margin-bottom: 20px;"><button id="saveChanges">Save Changes</button></div> 
+  <% } else { %>
+    <br><div style="text-align: center; margin-bottom: 20px;"><button id="saveChanges">Add Class</button></div> 
+  <% } %>
+</div>
+</form>
+<% if(imsaClass.name != "Add a Class"){ %>
+<form id="removeClassForm" action="/removeClass" method="post">
+ <br><div style="text-align: center; margin-bottom: 20px;"><button id="removeClassButton">Delete Class</button>
+<div class = "valuesDiv"><textarea name="oldName"><%= imsaClass.name %></textarea></div>
+</form>
+<% } %>
+<p id="copyright">©IMSA Courses 2022</p>     
+  
+<script>
+$(document).ready(function(){
+  $(document).on("click", "#addButton1", function(){
+    var unitsLength = $("#unitsLength").text();
+    $(this).parent().prev().remove();
+    $('<p>Unit ' + unitsLength + ':</p><textarea class="smallInput" name="units_' + (parseInt(unitsLength)-1).toString() + '">Start Typing Here</textarea><br><button type="button" class="deleteButton1">Delete Last Unit</button>').insertBefore(".addDiv:first")
+    $("#unitsLength").text((parseInt(unitsLength)+1).toString());
+  });
+  $(document).on("click", "#addButton2", function(){
+    var extraLength = $("#extraLength").text()
+    $(this).parent().prev().remove();
+    $('<p>Bullet Point ' + extraLength + ':</p><textarea class="largeInput" name="extra_' + (parseInt(extraLength)-1).toString() + '">Start Typing Here</textarea><br><button type="button" class="deleteButton2">Delete Last Bullet Point</button>').insertBefore(".addDiv:last")
+    $("#extraLength").text((parseInt(extraLength)+1).toString())
+  });
+  $(document).on("click", ".deleteButton1", function(){
+    var unitsLength = $("#unitsLength").text();
+
+    $(this).prev().prev().prev().prev().after('<button type="button" class="deleteButton1">Delete Last Unit</button>');
+    $(this).prev().prev().prev().remove();
+    $(this).prev().prev().remove();
+    $(this).prev().remove();
+    $(this).remove();
+
+    $("#unitsLength").text((parseInt(unitsLength)-1).toString());
+  });
+  $(document).on("click", ".deleteButton2", function(){
+    var extraLength = $("#extraLength").text();
+
+    $(this).prev().prev().prev().prev().after('<button type="button" class="deleteButton2">Delete Last Bullet Point</button>');
+    $(this).prev().prev().prev().remove();
+    $(this).prev().prev().remove();
+    $(this).prev().remove();
+    $(this).remove();
+
+    $("#extraLength").text((parseInt(extraLength)-1).toString());
+  });
+});
+</script>

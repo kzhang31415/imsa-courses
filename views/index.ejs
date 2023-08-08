@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IMSA Courses</title>
+  <link rel="icon" type="image/png" href="https://cdn.pixabay.com/photo/2017/05/13/20/46/office-2310610_960_720.png" sizes="16x16">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  <script> 
+  $(document).ready(function () {
+      $('select').selectize({
+          options: [
+            <% classList.forEach(function(c){ %>
+              <% const classValue = "/" + c["name"].split(" ").join("+"); %>
+              {id:"<%=classValue%>", name: "<%=c["name"]%>", department:"<%=c["department"]%>"},
+            <% }); %>
+          ],
+          optgroups: [
+            {id:"Math", name:"Math"},
+            {id:"CS", name:"CS"},
+            {id:"English", name:"English"},
+            {id:"Science", name:"Science"},
+            {id:"History and Social Science", name:"History and Social Science"},
+            {id:"World Language", name:"World Language"},
+            {id:"Fine Arts", name:"Fine Arts"},
+            {id:"Wellness", name:"Wellness"},
+            {id:"Archived", name:"Archived"},
+          ],
+          labelField: 'name',
+          valueField: 'id',
+          optgroupField: 'department',
+          optgroupLabelField: 'name',
+          optgroupValueField: 'id',
+          optgroupOrder: ['Math', 'CS', 'Science', 'English', 'History and Social Science', 'World Language', 'Fine Arts', "Wellness", 'Archived'],
+          sortField: 'name',
+          searchField: ['name'],
+      });
+  }); 
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+</head>
+
+<%- include('partials/header.ejs') %>
+
+<body>
+<div id="welcomeH1">
+  <h1>Welcome!</h1>
+</div>
+
+<div id="instructions">
+  <p>Welcome to the Home Page! Click the search bar <br> and select a class you want to know more about!</p>
+</div>
+
+<form class="searchBar" action="/classpage">
+  <select name="searchValue" id="select-class" placeholder="Search for a class..." style="display:inline" required>
+    <option></option>
+  </select>
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+
+<p id="instructions2">To add a class, select the "Add a Class" in the search bar, then enter the key at the bottom of the page. To remove a class, go to the edit page of that class, scroll down, and click "Delete Class"</p>
+</body>
+
+<footer>
+  ©2022|<a href="/about">About</a>
+</footer>
+
+</html>
